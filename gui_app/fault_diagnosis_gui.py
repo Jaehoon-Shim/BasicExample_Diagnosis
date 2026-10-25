@@ -91,6 +91,8 @@ class FaultPredictor:
                 + ", ".join(sorted(missing_keys))
             )
 
+        # Infer the layer sizes from the actual weights. This also keeps older
+        # checkpoints usable when their optional architecture metadata is stale.
         weight_items = [
             (key, value)
             for key, value in checkpoint["model_state_dict"].items()
@@ -488,3 +490,4 @@ def main():
 
 if __name__ == "__main__":
     sys.exit(main())
+
